@@ -15,7 +15,7 @@ const handleApiCall = (req, res) => {
     // so you would change from:
     // .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
     // to:
-    // .predict('c0c0ac362b03416da06ab3fa36fb58e3', req.body.input)
+    // .predict('d02b4508df58432fbb84e800597b8959', req.body.input)
     .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
     .then((data) => {
       res.json(data);
@@ -24,10 +24,10 @@ const handleApiCall = (req, res) => {
 };
 
 const handleImage = (req, res, db) => {
-  const { id } = req.body;
+  const { id, count } = req.body;
   db('users')
     .where('id', '=', id)
-    .increment('entries', 1)
+    .increment('entries', parseInt(count))
     .returning('entries')
     .then((entries) => {
       res.json(entries[0]);
