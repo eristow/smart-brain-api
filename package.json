@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "docker:start": "docker-compose --env-file ./.env.docker up --build"
   },
   "keywords": [],
   "author": "",
@@ -15,12 +16,14 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "knex": "^0.21.6",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.15",
     "morgan": "^1.10.0",
-    "pg": "^8.3.3"
+    "pg": "^8.5.1",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   },
   "description": ""
 }

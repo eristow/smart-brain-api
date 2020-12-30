@@ -1,4 +1,4 @@
-FROM node:fermium
+FROM node
 
 WORKDIR /usr/src/smart-brain-api
 
