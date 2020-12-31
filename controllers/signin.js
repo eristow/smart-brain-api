@@ -35,7 +35,7 @@ const getAuthTokenId = (req, res) => {
     if (err || !reply) {
       return res.status(400).json('Unauthorized');
     }
-    return res.json({ id: reply });
+    return res.json({ success: 'true', userId: reply });
   });
 };
 
