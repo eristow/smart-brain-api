@@ -1,35 +1,36 @@
-const handleProfileGet = (req, res, db) => {
+const handleProfileGet = async (req, res, db) => {
   const { id } = req.params;
-  db.select('*')
-    .from('users')
-    .where({ id })
-    .then((user) => {
-      if (user.length) {
-        res.json(user[0]);
-      } else {
-        res.status(400).json('Not found');
-      }
-    })
-    .catch((err) => res.status(400).json('error getting user'));
+  try {
+    const user = await db.select('*').from('users').where({ id });
+    if (user.length) {
+      res.json(user[0]);
+    } else {
+      res.status(400).json('Not found');
+    }
+  } catch (err) {
+    res.status(400).json('error getting user');
+  }
 };
 
-const handleProfileUpdate = (req, res, db) => {
+const handleProfileUpdate = async (req, res, db) => {
   const { id } = req.params;
   const { name, age, pet } = req.body.formInput;
 
-  db.select('*')
-    .from('users')
-    .where({ id })
-    // TODO: also update age and pet
-    .update({ name, age, pet })
-    .then((response) => {
-      if (response) {
-        res.json('success');
-      } else {
-        res.status(400).json('Unable to update');
-      }
-    })
-    .catch((err) => res.status(400).json('error updating user'));
+  try {
+    const response = await db
+      .select('*')
+      .from('users')
+      .where({ id })
+      .update({ name, age, pet });
+
+    if (response) {
+      res.json('success');
+    } else {
+      res.status(400).json('Unable to update');
+    }
+  } catch (err) {
+    res.status(400).json('error updating user');
+  }
 };
 
 module.exports = {

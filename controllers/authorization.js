@@ -7,7 +7,10 @@ const requireAuth = (req, res, next) => {
     return res.status(401).json('Unauthorized');
   }
 
-  return redisClient.get(authorization, (err, reply) => {
+  const bearer = authorization.split(' ');
+  const bearerToken = bearer[1];
+
+  return redisClient.get(bearerToken, (err, reply) => {
     if (err || !reply) {
       return res.status(401).json('Unauthorized');
     }

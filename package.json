@@ -4,7 +4,8 @@
   "main": "script.js",
   "scripts": {
     "start": "nodemon server.js",
-    "docker:start": "docker-compose --env-file ./.env.docker up --build"
+    "docker:up": "docker-compose --env-file ./.env.docker up --build",
+    "docker:down": "docker-compose down"
   },
   "keywords": [],
   "author": "",
